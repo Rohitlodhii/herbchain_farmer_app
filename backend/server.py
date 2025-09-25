@@ -72,6 +72,47 @@ async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
+# Herb submission endpoints
+@api_router.post("/herbs", response_model=HerbSubmission)
+async def create_herb_submission(herb_data: HerbSubmissionCreate):
+    try:
+        # Create herb submission object
+        herb_dict = herb_data.dict()
+        herb_obj = HerbSubmission(**herb_dict)
+        
+        # Insert into database
+        result = await db.herb_submissions.insert_one(herb_obj.dict())
+        
+        if result.inserted_id:
+            return herb_obj
+        else:
+            raise HTTPException(status_code=500, detail="Failed to create herb submission")
+    except Exception as e:
+        logger.error(f"Error creating herb submission: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@api_router.get("/herbs", response_model=List[HerbSubmission])
+async def get_herb_submissions():
+    try:
+        herb_submissions = await db.herb_submissions.find().to_list(1000)
+        return [HerbSubmission(**submission) for submission in herb_submissions]
+    except Exception as e:
+        logger.error(f"Error fetching herb submissions: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+@api_router.get("/herbs/{herb_id}", response_model=HerbSubmission)
+async def get_herb_submission(herb_id: str):
+    try:
+        herb_submission = await db.herb_submissions.find_one({"id": herb_id})
+        if not herb_submission:
+            raise HTTPException(status_code=404, detail="Herb submission not found")
+        return HerbSubmission(**herb_submission)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error fetching herb submission: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
 # Include the router in the main app
 app.include_router(api_router)
 
