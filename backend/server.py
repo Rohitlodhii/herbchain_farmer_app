@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -6,9 +6,9 @@ import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field
-from typing import List
+from typing import List, Optional
 import uuid
-from datetime import datetime
+from datetime import datetime, date
 
 
 ROOT_DIR = Path(__file__).parent
@@ -34,6 +34,26 @@ class StatusCheck(BaseModel):
 
 class StatusCheckCreate(BaseModel):
     client_name: str
+
+class HerbSubmission(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    herb_name: str
+    harvest_date: str
+    quantity: float
+    location: str
+    farm: str
+    pesticides_used: Optional[str] = ""
+    submission_type: str  # 'online' or 'offline'
+    created_at: str = Field(default_factory=lambda: datetime.utcnow().isoformat())
+
+class HerbSubmissionCreate(BaseModel):
+    herb_name: str
+    harvest_date: str
+    quantity: float
+    location: str
+    farm: str
+    pesticides_used: Optional[str] = ""
+    submission_type: str
 
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
