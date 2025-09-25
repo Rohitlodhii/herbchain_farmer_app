@@ -347,5 +347,3 @@ const styles = StyleSheet.create({
     color: '#ffffff',
   },
 });
-</absolute_file_name>
-    </file>
