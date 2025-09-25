@@ -1,7 +1,9 @@
 {
-  "name": "frontend",
+  "name": "HerbLink",
   "main": "expo-router/entry",
   "version": "1.0.0",
+ 
+
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -25,6 +27,7 @@
     "expo-haptics": "~14.1.4",
     "expo-image": "~2.4.0",
     "expo-linking": "~7.1.7",
+    "expo-location": "^19.0.7",
     "expo-router": "~5.1.4",
     "expo-splash-screen": "~0.30.10",
     "expo-status-bar": "~2.2.3",

@@ -105,7 +105,7 @@ export default function SuccessScreen() {
             />
           </View>
           <Text style={styles.qrLabel}>
-            Scan this QR code to view your submission
+            Paste this QR code on the Herb
           </Text>
         </Animated.View>
 
@@ -119,7 +119,7 @@ export default function SuccessScreen() {
         >
           <TouchableOpacity style={styles.shareButton} onPress={handleShare}>
             <Ionicons name="share-outline" size={20} color="#4ade80" />
-            <Text style={styles.shareButtonText}>Share</Text>
+            <Text style={styles.shareButtonText}>Print QR</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.homeButton} onPress={handleGoHome}>

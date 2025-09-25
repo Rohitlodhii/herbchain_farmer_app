@@ -8,28 +8,32 @@ import {
   ScrollView,
   Alert,
   Platform,
+  Button,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import LocationInput from '@/components/map';
 
 export default function AddHerbScreen() {
   const { type } = useLocalSearchParams();
   const [herbName, setHerbName] = useState('');
   const [harvestDate, setHarvestDate] = useState(new Date());
   const [quantity, setQuantity] = useState('');
-  const [location, setLocation] = useState('');
+ 
   const [selectedFarm, setSelectedFarm] = useState('');
   const [pesticidesUsed, setPesticidesUsed] = useState('');
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
+
   const farms = [
-    'Green Valley Farm',
-    'Organic Paradise',
-    'Natural Herbs Co.'
+    'Farm1 - 3hectare',
+    'Farm2 - 1hectare',
+    'Farm3 - 1.2hectare'
   ];
 
   const onDateChange = (event: any, selectedDate?: Date) => {
@@ -130,7 +134,7 @@ export default function AddHerbScreen() {
             />
           </View>
 
-          <View style={styles.inputGroup}>
+          {/* <View style={styles.inputGroup}>
             <Text style={styles.label}>Location *</Text>
             <TextInput
               style={styles.input}
@@ -139,7 +143,13 @@ export default function AddHerbScreen() {
               value={location}
               onChangeText={setLocation}
             />
-          </View>
+          </View> */}
+
+          <View style={styles.inputGroup}>
+          <Text style={styles.label}>Location *</Text>
+      <LocationInput  value={location} onChange={setLocation} />
+     
+    </View>
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Select Farm *</Text>

@@ -67,15 +67,15 @@ export default function HomeScreen() {
           <Text style={styles.sectionTitle}>Your Statistics</Text>
           <View style={styles.statsRow}>
             <View style={styles.statCard}>
-              <Text style={styles.statNumber}>12</Text>
+              <Text style={styles.statNumber}>2</Text>
               <Text style={styles.statLabel}>Herbs Added</Text>
             </View>
             <View style={styles.statCard}>
-              <Text style={styles.statNumber}>3</Text>
+              <Text style={styles.statNumber}>1</Text>
               <Text style={styles.statLabel}>This Week</Text>
             </View>
             <View style={styles.statCard}>
-              <Text style={styles.statNumber}>2</Text>
+              <Text style={styles.statNumber}>3</Text>
               <Text style={styles.statLabel}>Total Farms</Text>
             </View>
           </View>

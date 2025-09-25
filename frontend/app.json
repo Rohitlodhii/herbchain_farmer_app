@@ -1,19 +1,20 @@
 {
   "expo": {
-    "name": "frontend",
-    "slug": "frontend",
+    "name": "Herblink",
+    "slug": "herblink",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/newicon.png",
     "scheme": "frontend",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "package": "com.rohit.herblink",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/newicon.png",
         "backgroundColor": "#000"
       },
       "edgeToEdgeEnabled": true
@@ -21,14 +22,14 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/newicon.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/herblink.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#000"
@@ -37,6 +38,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "9ce4ae70-1ef6-49d9-9f83-8384766c82cb"
+      }
+    },
+    "owner": "rohitlodhiiii"
   }
 }

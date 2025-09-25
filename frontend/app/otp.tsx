@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -15,6 +15,7 @@ import { router } from 'expo-router';
 export default function OTPScreen() {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [timer, setTimer] = useState(60);
+  const inputsRef = useRef<TextInput[]>([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -27,6 +28,16 @@ export default function OTPScreen() {
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
+
+    // move to next input if value entered
+    if (value && index < otp.length - 1) {
+      inputsRef.current[index + 1]?.focus();
+    }
+
+    // move back if deleted
+    if (!value && index > 0) {
+      inputsRef.current[index - 1]?.focus();
+    }
   };
 
   const handleVerifyOTP = () => {
@@ -35,7 +46,6 @@ export default function OTPScreen() {
       Alert.alert('Invalid OTP', 'Please enter the complete OTP');
       return;
     }
-    // For now, accept any 6-digit OTP
     router.replace('/tabs');
   };
 
@@ -61,18 +71,22 @@ export default function OTPScreen() {
 
           <View style={styles.otpContainer}>
             {otp.map((digit, index) => (
-              <TextInput
-                key={index}
-                style={[
-                  styles.otpInput,
-                  digit ? styles.otpInputFilled : null,
-                ]}
-                value={digit}
-                onChangeText={(value) => handleOtpChange(value, index)}
-                keyboardType="numeric"
-                maxLength={1}
-                textAlign="center"
-              />
+            <TextInput
+            key={index}
+            ref={(el) => {
+              if (el) inputsRef.current[index] = el;
+            }}
+            style={[
+              styles.otpInput,
+              digit ? styles.otpInputFilled : null,
+            ]}
+            value={digit}
+            onChangeText={(value) => handleOtpChange(value, index)}
+            keyboardType="numeric"
+            maxLength={1}
+            textAlign="center"
+          />
+          
             ))}
           </View>
 

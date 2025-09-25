@@ -46,7 +46,7 @@ export default function LoadingScreen() {
           <Text style={styles.logoText}>🌿</Text>
         </View>
         <Text style={styles.titleText}>HerbLink</Text>
-        <Text style={styles.subtitleText}>Connect with Nature</Text>
+        <Text style={styles.subtitleText}></Text>
       </Animated.View>
     </SafeAreaView>
   );
