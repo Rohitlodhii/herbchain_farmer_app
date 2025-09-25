@@ -37,5 +37,3 @@ export default function RootLayout() {
     </GestureHandlerRootView>
   );
 }
-</absolute_file_name>
-    </file>
